@@ -5,7 +5,7 @@ chdir = '/opt/roysss/roysss'
 
 bind = '127.0.0.1:8002'
 proc_name = 'roysss.wsgi'
-pidfile = '/opt/roysss/var/run/roys.wsgi.pid'
+pidfile = '/opt/roysss/var/run/roysss.pid'
 
 import multiprocessing
 workers = multiprocessing.cpu_count() * 2 + 1
