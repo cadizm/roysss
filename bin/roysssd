@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /opt/roysss/roysss
+/opt/virtualenvs/roysss/bin/gunicorn -c gunicorn_config.py roysss.wsgi

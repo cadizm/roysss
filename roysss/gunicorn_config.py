@@ -11,11 +11,11 @@ import multiprocessing
 workers = multiprocessing.cpu_count() * 2 + 1
 
 reload = True
-daemon = True
+daemon = False  # use systemd
+capture_output = True
 
 user = 'www-data'
 group = 'www-data'
 
-capture_output = True
 accesslog = '/opt/roysss/var/log/access.log'
 errorlog = '/opt/roysss/var/log/error.log'

@@ -1,0 +1,14 @@
+
+[Unit]
+Description=roysss daemon
+After=network.target
+
+[Service]
+PIDFile=/opt/roysss/var/run/roysss.pid
+ExecStart=/opt/roysss/bin/roysssd
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
