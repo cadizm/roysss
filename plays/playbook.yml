@@ -20,6 +20,7 @@
       copy:
         src: "{{playbook_dir}}/roysss.service"
         dest: /etc/systemd/system
+        mode: 755
       notify:
         - Enable roysss service
         - Reload roysss service
