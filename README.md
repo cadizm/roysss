@@ -10,9 +10,18 @@ Do a `vagrant up` and set up a local user that has `sudo`.
 All other interaction should be done via ansible.
 
 
-Environment Variables
-=====================
+Secrets
+=======
 
-These need to be set manually on a per-user basis.
+Environment variables and other secrets need to be read manually as needed
+from `secrets` file in the project's root directory.
 
-* `DJANGO_SECRET_KEY` (root)
+
+Installing pip Packages
+=======================
+
+For installing `cryptography`
+
+```
+$ env ARCHFLAGS="-arch x86_64" LDFLAGS="-L/usr/local/opt/openssl/lib" CFLAGS="-I/usr/local/opt/openssl/include" pip install cryptography
+```

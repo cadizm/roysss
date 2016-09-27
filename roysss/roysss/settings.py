@@ -15,12 +15,22 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+secrets = {}
+for line in open(os.path.join(BASE_DIR, '..', 'secrets')):
+    if not line or line.startswith('#'):
+        continue
+    try:
+        key, value = [s.strip() for s in line.split('=')]
+        secrets[key] = value
+    except:
+        continue
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
+SECRET_KEY = secrets['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
