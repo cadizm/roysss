@@ -1,0 +1,68 @@
+
+---
+
+- hosts: local
+  become: true
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx=1.10.0-0ubuntu0.16.04.2
+        state: present
+        update_cache: yes
+
+    - name: Copy roysss nginx conf
+      copy:
+        src: "{{playbook_dir}}/roysss.conf"
+        dest: /etc/nginx/sites-enabled
+      notify: Reload nginx
+
+    - name: Copy roysss systemd conf
+      copy:
+        src: "{{playbook_dir}}/roysss.service"
+        dest: /etc/systemd/system
+      notify:
+        - Enable roysss service
+        - Reload roysss service
+
+    - name: Install vim
+      apt:
+        name: vim
+        state: latest
+
+    - name: Install git
+      apt:
+        name: git
+        state: latest
+
+    - name: Pull git repo
+      git:
+        repo: https://github.com/cadizm/roysss.git
+        dest: /opt/roysss
+
+    - name: Install pip
+      apt:
+        name: python-pip
+        state: latest
+
+    - name: Install virtualenv
+      pip:
+        name: virtualenv
+        state: latest
+
+    - name: Make roysss virtualenv
+      shell: virtualenv /opt/virtualenvs/roysss
+
+    - name: Install roysss requrements
+      pip:
+        requirements: /opt/roysss/requirements.txt
+        virtualenv: /opt/virtualenvs/roysss
+
+  handlers:
+    - name: Reload nginx
+      service: name=nginx state=reloaded
+
+    - name: Enable roysss service
+      service: name=roysss enabled=yes
+
+    - name: Reload roysss service
+      command: systemctl daemon-reload
