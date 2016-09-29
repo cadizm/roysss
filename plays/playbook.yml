@@ -63,8 +63,8 @@
         requirements: /opt/roysss/requirements.txt
         virtualenv: /opt/virtualenvs/roysss
 
-    - name: Start roysss service
-      service: name=roysss state=started
+    - name: Restart roysss service
+      service: name=roysss state=restarted
 
   handlers:
     - name: Reload nginx
