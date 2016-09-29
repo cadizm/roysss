@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-import socket
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,11 +30,6 @@ for line in open(os.path.join(BASE_DIR, '..', 'secrets')):
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 SECRET_KEY = secrets['DJANGO_SECRET_KEY']
-
-HOSTNAME = socket.gethostname()
-
-PRODUCTION = False if HOSTNAME == 'l00k' else True
-DEBUG = True if not PRODUCTION else False
 
 ALLOWED_HOSTS = []
 

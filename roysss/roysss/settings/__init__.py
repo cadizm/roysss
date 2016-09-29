@@ -1,5 +1,9 @@
 
-from common import *
+import socket
+HOSTNAME = socket.gethostname()
+
+PRODUCTION = False if HOSTNAME == 'l00k' else True
+DEBUG = True if not PRODUCTION else False
 
 try:
     if DEBUG:
