@@ -1,4 +1,10 @@
 #!/bin/bash
 
 cd /opt/roysss/roysss
+
+if [[ ! -f secrets ]]; then
+    echo "[`date`] Secrets file missing, bailing" >> /opt/roysss/var/log/error.log
+    exit 1
+fi
+
 /opt/virtualenvs/roysss/bin/gunicorn -c gunicorn_config.py roysss.wsgi
