@@ -63,6 +63,10 @@
         requirements: /opt/roysss/requirements.txt
         virtualenv: /opt/virtualenvs/roysss
 
+    - name: Copy royss secrets (task)
+      command: /bin/true
+      notify: Copy roysss secrets
+
     - name: Restart roysss service
       service: name=roysss state=restarted
 
@@ -75,3 +79,8 @@
 
     - name: Reload roysss service
       command: systemctl daemon-reload
+
+    - name: Copy roysss secrets
+      copy:
+        src: "{{playbook_dir}}/../roysss/secrets"
+        dest: /opt/roysss/roysss/secrets
