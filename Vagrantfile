@@ -9,8 +9,8 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
   config.vm.network "forwarded_port", guest: 8002, host: 8002
 
-#  config.vm.provision "ansible" do |ansible|
-#    ansible.playbook = "playbook which adds sudo user and ssh security settings"
-#  end
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "lib/ansible-provision/adduser-cadizm.yml"
+  end
 
 end
