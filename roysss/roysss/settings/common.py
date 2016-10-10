@@ -17,7 +17,7 @@ for line in open(os.path.join(BASE_DIR, '..', 'secrets')):
 
 SECRET_KEY = secrets['DJANGO_SECRET_KEY']
 
-ALLOWED_HOSTS = ['192.168.101.2', '.roys.com']
+ALLOWED_HOSTS = ['192.168.101.2', '.roysss.com']
 
 
 INSTALLED_APPS = [
