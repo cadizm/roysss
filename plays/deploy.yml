@@ -1,0 +1,26 @@
+
+---
+
+- hosts: all
+  become: true
+  tasks:
+    - name: Pull git repo
+      git:
+        repo: https://github.com/cadizm/roysss.git
+        dest: /opt/roysss
+
+    - name: Install roysss requrements
+      pip:
+        requirements: /opt/roysss/requirements.txt
+        virtualenv: /opt/virtualenvs/roysss
+
+    - name: Copy roysss secrets
+      copy:
+        src: "{{playbook_dir}}/../roysss/secrets"
+        dest: /opt/roysss/roysss/secrets
+
+    - name: Reload roysss service
+      command: systemctl daemon-reload
+
+    - name: Restart roysss service
+      service: name=roysss state=restarted
