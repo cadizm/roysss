@@ -1,0 +1,29 @@
+
+---
+
+- hosts: all
+  become: true
+  tasks:
+    - name: Copy roysss nginx conf
+      copy:
+        src: "{{playbook_dir}}/roysss-ssl.conf"
+        dest: /etc/nginx/sites-enabled
+      notify: Reload nginx
+
+    - name: Install letsencrypt
+      apt:
+        name: letsencrypt
+        state: latest
+
+    - name: Get ssl/tls cert
+      command: letsencrypt certonly --webroot -w /opt/roysss/var/www/ -d roysss.com --non-interactive --email='michael.cadiz@gmail.com' --agree-tos
+
+    - name: Add cert renewal cron
+      cron:
+        minute: 33
+        hour: 2,14
+        job: letsencrypt renew --pre-hook='service nginx stop' --post-hook='service nginx start' --agree-tos
+
+  handlers:
+    - name: Reload nginx
+      service: name=nginx state=reloaded

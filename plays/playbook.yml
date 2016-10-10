@@ -45,11 +45,6 @@
         name: python-pip
         state: latest
 
-    - name: Install letsencrypt
-      apt:
-        name: letsencrypt
-        state: latest
-
     - name: Install virtualenv
       pip:
         name: virtualenv
