@@ -1,4 +1,5 @@
 *.db
+*.retry
 .DS_Store
 .env
 .idea
@@ -7,5 +8,4 @@ venv
 env
 __pycache__
 db.sqlite3
-playbook.retry
 secrets

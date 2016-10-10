@@ -1,7 +1,7 @@
-.PHONY: all deploy_local
+.PHONY: all deploy_local deploy_remote adduser_cadizm_remote
 
 all:
-	echo "Targets: deploy_local"
+	@echo "Targets:\n\tdeploy_local\n\tdeploy_remote\n\tadduser_cadizm_remote"
 
 deploy_local:
 	ansible-playbook --limit=local plays/playbook.yml
