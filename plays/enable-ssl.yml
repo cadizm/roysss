@@ -7,7 +7,7 @@
     - name: Copy roysss nginx conf
       copy:
         src: "{{playbook_dir}}/roysss-ssl.conf"
-        dest: /etc/nginx/sites-enabled
+        dest: /etc/nginx/sites-enabled/roysss.conf
       notify: Reload nginx
 
     - name: Install letsencrypt
