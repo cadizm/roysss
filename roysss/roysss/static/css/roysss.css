@@ -1,7 +1,6 @@
 
 body {
   font-family: 'Courier', 'Courier New', monospace;
-  font-size: 1.1vw;
 
   padding-top: 20px;
   padding-bottom: 20px;
@@ -14,63 +13,55 @@ a {
 img {
   padding-top: 10px;
   padding-bottom: 20px;
+  max-width: 100%;
 }
 
-.header,
-.footer {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-/* Custom page header */
 .header {
   padding-bottom: 20px;
   border-bottom: 1px solid #e5e5e5;
 }
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-}
 
-/* Custom page footer */
 .footer {
-  padding-top: 19px;
+  padding-top: 20px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
-/* Customize container */
 @media (min-width: 768px) {
   .container {
     max-width: 730px;
   }
 }
-.container-narrow > hr {
-  margin: 30px 0;
+
+.container {
+  text-align: justify;
+  padding-bottom: 10px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .footer {
-    padding-right: 0;
-    padding-left: 0;
+@media (min-width: 320px) {
+  .container {
+    max-width: 320px;
   }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
+}
+
+@media (min-width: 360px) {
+  .container {
+    max-width: 360px;
+  }
+}
+
+@media (min-width: 412px) {
+  .container {
+    max-width: 412px;
+  }
+}
+
+@media (min-width: 530px) {
+  .container {
+    max-width: 530px;
   }
 }
 
 .item {
   padding-bottom: 10px;
-}
-
-.description {
-  text-align: justify;
-  padding-bottom: 10px;
-  max-width: 540px;
 }
