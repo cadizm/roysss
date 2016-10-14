@@ -28,8 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # start local apps
-    'apps.home',
-    'apps.shop',
+    'roysss.apps.home',
+    'roysss.apps.shop',
 ]
 
 

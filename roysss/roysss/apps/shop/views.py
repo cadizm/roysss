@@ -3,7 +3,7 @@ from datetime import datetime
 
 from django.views.generic.base import TemplateView
 
-from .mixins import StripeMixin
+from roysss.apps.shop.mixins import StripeMixin
 
 
 class ShopView(StripeMixin, TemplateView):

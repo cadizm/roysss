@@ -1,7 +1,7 @@
 
 from django.conf.urls import url
 
-from .views import ShopView
+from roysss.apps.shop.views import ShopView
 
 
 urlpatterns = [

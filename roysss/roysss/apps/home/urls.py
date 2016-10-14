@@ -1,7 +1,7 @@
 
 from django.conf.urls import url
 
-from .views import HomeView
+from roysss.apps.home.views import HomeView
 
 
 urlpatterns = [
