@@ -3,6 +3,7 @@ import os
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LOG_DIR = os.path.abspath(os.path.join(BASE_DIR, '..', '..', 'var', 'log'))
 
 secrets = {}
 for line in open(os.path.join(BASE_DIR, '..', 'secrets')):
@@ -28,12 +29,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # start local apps
+    'roysss.apps.common',
     'roysss.apps.home',
     'roysss.apps.shop',
 ]
 
 
 MIDDLEWARE = [
+    'roysss.apps.common.middleware.RequestIdMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -41,6 +44,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'roysss.apps.common.middleware.UuidMiddleware',
 ]
 
 ROOT_URLCONF = 'roysss.urls'
@@ -99,4 +103,56 @@ STATIC_URL = '/static/'
 STRIPE = {
     'SECRET_KEY': None,
     'PUBLISHABLE_KEY': None,
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s %(request_id)s %(module)s %(funcName)s %(lineno)s %(message)s'
+        },
+        'simple': {
+            'format': '%(asctime)s %(request_id)s %(message)s'
+        },
+    },
+    'filters': {
+        'inject_request_id': {
+            '()': 'roysss.apps.common.roysss_logging.filters.RequestIdFilter',
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file_debug': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_DIR, 'roysss-debug.log'),
+            'formatter': 'simple',
+            'filters': ['inject_request_id'],
+        },
+        'file_error': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_DIR, 'roysss-error.log'),
+            'formatter': 'verbose',
+            'filters': ['inject_request_id'],
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'roysss': {
+            'handlers': ['console', 'file_debug', 'file_error'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
 }

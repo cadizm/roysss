@@ -1,0 +1,46 @@
+[
+{
+    "model": "shop.style",
+    "fields": {
+        "style_id": "s001",
+        "description": "Roysss Teee | size medium"
+    }
+},
+{
+    "model": "shop.style",
+    "fields": {
+        "style_id": "s002",
+        "description": "Roysss Teee | size large"
+    }
+},
+{
+    "model": "shop.item",
+    "fields": {
+        "style": 1,
+        "amount": 2500,
+        "description": "Roysss Teee"
+    }
+},
+{
+    "model": "shop.item",
+    "fields": {
+        "style": 2,
+        "amount": 2500,
+        "description": "Roysss Teee"
+    }
+},
+{
+    "model": "shop.inventory",
+    "fields": {
+        "item": 1,
+        "quantity": 100
+    }
+},
+{
+    "model": "shop.inventory",
+    "fields": {
+        "item": 2,
+        "quantity": 100
+    }
+}
+]

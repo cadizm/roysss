@@ -25,25 +25,30 @@
              alt="Roysss Teee">
 
         <p class="description">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <p>$25.00</p>
 
         <p>
-          <form action="/your-server-side-code" method="POST">
-          <script
-            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="{{ stripe.PUBLISHABLE_KEY }}"
-            data-amount="2000"
-            data-name="cadizm"
-            data-description="2 widgets"
-            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-            data-locale="auto"
-            data-zip-code="true">
-          </script>
+          <form action="/shop/checkout/" method="POST">
+            <script
+              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="{{ stripe.PUBLISHABLE_KEY }}"
+              data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+              data-description="Roysss Teee"
+              data-amount="2500"
+              data-locale="auto"
+              data-zip-code="true"
+              data-billing-address="true"
+              data-label="Purchase"
+              data-allow-remember-me="false">
+            </script>
+            <input type="hidden" name="style_id" value="s001">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
           </form>
         <p>
       </div>
 
       <footer class="footer">
-        <p>&copy; {{ year }} Roysss, Inc.</p>
+        <p>&copy; {{ current_year }} Roysss, Inc.</p>
       </footer>
 
     </div>

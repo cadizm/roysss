@@ -25,6 +25,13 @@
         - Enable roysss service
         - Reload roysss service
 
+    - name: Install redis server
+      apt:
+        name: redis-server
+        state: latest
+      notify:
+        - Start redis service
+
     - name: Install vim
       apt:
         name: vim
@@ -73,6 +80,9 @@
   handlers:
     - name: Reload nginx
       service: name=nginx state=reloaded
+
+    - name: Start redis service
+      service: name=redis-server state=started
 
     - name: Enable roysss service
       service: name=roysss enabled=yes

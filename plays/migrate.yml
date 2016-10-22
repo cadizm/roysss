@@ -1,0 +1,17 @@
+
+---
+
+- hosts: all
+  become: true
+  tasks:
+    - name: makemigrations
+      command:
+
+    - name: migrate
+      command:
+
+    - name: Reload roysss service
+      command: systemctl daemon-reload
+
+    - name: Restart roysss service
+      service: name=roysss state=restarted

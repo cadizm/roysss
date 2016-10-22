@@ -1,3 +1,7 @@
 from django.test import TestCase
 
-# Create your tests here.
+
+class CheckoutTestCase(TestCase):
+
+    def test_checkout_success(self):
+        pass

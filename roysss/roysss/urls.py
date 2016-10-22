@@ -7,5 +7,5 @@ import roysss.apps.shop.urls
 
 urlpatterns = [
     url(r'^', include(roysss.apps.home.urls)),
-    url(r'^shop', include(roysss.apps.shop.urls)),
+    url(r'^shop/', include(roysss.apps.shop.urls)),
 ]
