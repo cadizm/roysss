@@ -1,4 +1,6 @@
 
+from datetime import datetime
+
 from django.conf import settings
 from django.http import JsonResponse
 
@@ -6,24 +8,25 @@ from django.views.generic.base import View, TemplateView
 
 
 class BaseView(View):
-    pass
-
-
-class BaseTemplateView(BaseView, TemplateView):
     status_code = 200
 
     def get_context_data(self, *args, **kwargs):
-        context = super(BaseTemplateView, self).get_context_data(*args, **kwargs)
+        context = super(BaseView, self).get_context_data(*args, **kwargs)
 
         context.update(
             request_id=self.request.request_id,
+            current_year=datetime.now().year,
             )
 
         return context
 
     def render_to_response(self, *args, **kwargs):
         kwargs['status'] = self.status_code
-        return super(BaseTemplateView, self).render_to_response(*args, **kwargs)
+        return super(BaseView, self).render_to_response(*args, **kwargs)
+
+
+class BaseTemplateView(BaseView, TemplateView):
+    template_name = None
 
 
 class Handler400View(TemplateView):
@@ -33,11 +36,6 @@ class Handler400View(TemplateView):
     status_code = 400
     template_name = '400.html'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(Handler400View, self).get_context_data(*args, **kwargs)
-
-        return context
-
 
 class Handler403View(TemplateView):
     """
@@ -45,11 +43,6 @@ class Handler403View(TemplateView):
     """
     status_code = 403
     template_name = '403.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(Handler403View, self).get_context_data(*args, **kwargs)
-
-        return context
 
 
 class Handler404View(BaseTemplateView):
@@ -59,11 +52,6 @@ class Handler404View(BaseTemplateView):
     status_code = 404
     template_name = '404.html'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(Handler404View, self).get_context_data(*args, **kwargs)
-
-        return context
-
 
 class Handler500View(TemplateView):
     """
@@ -71,8 +59,3 @@ class Handler500View(TemplateView):
     """
     status_code = 500
     template_name = '500.html'
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(Handler500View, self).get_context_data(*args, **kwargs)
-
-        return context

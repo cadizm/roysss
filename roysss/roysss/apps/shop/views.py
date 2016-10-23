@@ -1,10 +1,9 @@
 
-from datetime import datetime
+from django.core.urlresolvers import reverse
+from django.http import HttpResponse, HttpResponseRedirect
 
-from django.core.exceptions import SuspiciousOperation
-from django.http import HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponse
-
-from roysss.apps.common.views import BaseView, BaseTemplateView
+from roysss.apps.common.mixins import GetMethodNotAllowedMixin
+from roysss.apps.common.views import BaseView, BaseTemplateView, Handler400View
 
 from roysss.apps.shop.checkout import stripe_checkout
 from roysss.apps.shop.mixins import StripeMixin
@@ -16,23 +15,8 @@ logger = logging.getLogger(__name__)
 class ShopView(StripeMixin, BaseTemplateView):
     template_name = 'index.html'
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(ShopView, self).get_context_data(*args, **kwargs)
 
-        context.update(
-            current_year=datetime.now().year,
-        )
-
-        return context
-
-
-class CheckoutView(BaseView):
-
-    def dispatch(self, *args, **kwargs):
-        if self.request.method == 'GET':
-            raise SuspiciousOperation()
-
-        return super(CheckoutView, self).dispatch(*args, **kwargs)
+class CheckoutView(GetMethodNotAllowedMixin, BaseView):
 
     def post(self, *args, **kwargs):
         try:
@@ -46,17 +30,17 @@ class CheckoutView(BaseView):
 
         except Exception as e:
             logger.exception(e)
-            return HttpResponseBadRequest(self.request.request_id)
+            return HttpResponseRedirect(reverse('checkout_error'))
+
+
+class CheckoutErrorView(Handler400View):
+    template_name = 'checkout_error.html'
 
 
 class ConfirmationView(BaseTemplateView):
     template_name = 'confirmation.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(ShopView, self).get_context_data(*args, **kwargs)
-
-        context.update(
-            year=datetime.now().year,
-        )
+        context = super(ConfirmationView, self).get_context_data(*args, **kwargs)
 
         return context
