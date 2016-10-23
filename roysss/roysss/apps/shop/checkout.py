@@ -5,15 +5,22 @@ import stripe
 stripe.api_key = settings.STRIPE['SECRET_KEY']
 
 from roysss.apps.shop.models import (
-    Item, StripeOrder, StripeCharge,
+    Item, Inventory, StripeOrder, StripeCharge,
     )
 
 
 def stripe_checkout(request, **kwargs):
+    # For now, only support checkout of a single item
+    quantity = 1
+
     token = stripe.Token.retrieve(kwargs.pop('stripeToken', None))
 
     style_id = kwargs.pop('style_id', None)
     item = Item.objects.get(style__style_id=style_id)
+    inventory = Inventory.objects.get(item=item)
+
+    inventory.quantity -= quantity
+    inventory.save()  # raises InsufficientInventoryError
 
     order = StripeOrder.objects.create(
         uuid=request.session['uuid'],
@@ -26,7 +33,7 @@ def stripe_checkout(request, **kwargs):
         zipcode=kwargs['stripeBillingAddressZip']
         )
 
-    order.orderitems_set.create(item=item, quantity=1)
+    order.orderitems_set.create(item=item, quantity=quantity)
 
     metadata = {
         'request_id': request.request_id,

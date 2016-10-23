@@ -5,6 +5,8 @@ from django.db import models
 
 from roysss.apps.common.utils import pp_cents_to_dollars, gen_order_number
 
+from roysss.apps.shop.exceptions import InsufficientInventoryError
+
 
 class Style(models.Model):
     style_id = models.CharField(max_length=32)
@@ -29,6 +31,15 @@ class Inventory(models.Model):
 
     def __str__(self):
         return "(%s) quantity: %d" % (self.item.style.style_id, self.quantity)
+
+    def save(self, **kwargs):
+        if self.quantity < 0:
+            raise InsufficientInventoryError()
+
+        return super(Inventory, self).save(**kwargs)
+
+    def style_quantity(self):
+        return {self.item.style.style_id: self.quantity}
 
 
 class StripeOrderManager(models.Manager):

@@ -1,0 +1,4 @@
+
+
+class InsufficientInventoryError(Exception):
+    pass
