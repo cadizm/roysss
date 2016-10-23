@@ -1,6 +1,7 @@
 
 from datetime import datetime
 
+from django.core.exceptions import SuspiciousOperation
 from django.http import HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponse
 
 from roysss.apps.common.views import BaseView, BaseTemplateView
@@ -29,7 +30,7 @@ class CheckoutView(BaseView):
 
     def dispatch(self, *args, **kwargs):
         if self.request.method == 'GET':
-            return HttpResponseNotAllowed('Method not allowed')
+            raise SuspiciousOperation()
 
         return super(CheckoutView, self).dispatch(*args, **kwargs)
 
