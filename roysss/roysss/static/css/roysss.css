@@ -34,7 +34,6 @@ img {
 }
 
 .container {
-  text-align: justify;
   padding-bottom: 10px;
 }
 
@@ -63,5 +62,6 @@ img {
 }
 
 .item {
+  text-align: justify;
   padding-bottom: 10px;
 }

@@ -2,9 +2,12 @@
 from datetime import datetime
 
 from django.conf import settings
+from django.core.serializers import settings
 from django.http import JsonResponse
 
 from django.views.generic.base import View, TemplateView
+
+from roysss.apps.common.utils import context_json_encode
 
 
 class BaseView(View):
@@ -20,9 +23,13 @@ class BaseView(View):
 
         return context
 
-    def render_to_response(self, *args, **kwargs):
+    def render_to_response(self, context, **kwargs):
         kwargs['status'] = self.status_code
-        return super(BaseView, self).render_to_response(*args, **kwargs)
+
+        if 'context' in self.request.GET and settings.DEBUG:
+            return JsonResponse(context_json_encode(context), safe=False)
+
+        return super(BaseView, self).render_to_response(context, **kwargs)
 
 
 class BaseTemplateView(BaseView, TemplateView):

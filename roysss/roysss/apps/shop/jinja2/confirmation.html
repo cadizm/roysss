@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Confirmation #{{ order.number }}</title>
+
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/roysss.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <a href="/"><h2 class="text-muted">Roysss</h2></a>
+      </div>
+
+      <p>
+        Thanks for your order!  Your order number is <strong>#{{ order.number }}</strong>.<br />
+        An email confirmation has been sent to {{ order.email }}.
+      </p>
+
+      <footer class="footer">
+        <p>&copy; {{ current_year }} Roysss, Inc.</p>
+      </footer>
+
+    </div>
+
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/js.cookie-2.1.3.min.js"></script>
+    <script src="/static/js/roysss.js"></script>
+  </body>
+</html>

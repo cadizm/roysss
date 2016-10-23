@@ -1,4 +1,5 @@
 
+import json
 import string
 import random
 
@@ -29,3 +30,19 @@ def gen_order_number(size=8, tries=0):
         return gen_order_number(size=size, tries=tries+1)
 
     raise Exception("Couldn't generate order number")
+
+
+def context_json_encode(obj):
+    if isinstance(obj, list):
+        return [context_json_encode(e) for e in obj]
+
+    elif isinstance(obj, dict):
+        return {k: context_json_encode(v) for k,v in obj.iteritems()}
+
+    else:
+        try:
+            json.dumps(obj)
+            return obj
+
+        except TypeError as e:
+            return str(e)
