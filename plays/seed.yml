@@ -1,0 +1,10 @@
+
+---
+
+- hosts: all
+  become: true
+  tasks:
+    - name: See shop
+      command: /opt/virtualenvs/roysss/bin/python manage.py loaddata seed-shop
+      args:
+        chdir: /opt/roysss/roysss

@@ -1,26 +1,38 @@
 
-.PHONY: all setup_local setup_remote deploy_local deploy_remote adduser_cadizm_remote letsencrypt_remote
+.PHONY: all local_setup local_deploy remote_setup remote_deploy remote_adduser_cadizm remote_letsencrypt
 
 all:
 	@echo "See this Makefile for targets"
 
-setup_local:
+local_setup:
 	ansible-playbook --limit=local plays/setup.yml
 
-setup_remote:
-	ansible-playbook --user=cadizm --limit=remote plays/setup.yml
-
-deploy_local:
+local_deploy:
 	ansible-playbook --limit=local plays/deploy.yml
 
-deploy_remote:
-	ansible-playbook --user=cadizm --limit=remote plays/deploy.yml
+local_migrate:
+	ansible-playbook --limit=local plays/migrate.yml
+
+local_seed:
+	ansible-playbook --limit=local plays/seed.yml
+
+remote_setup:
+	ansible-playbook --limit=remote --user=cadizm plays/setup.yml
+
+remote_deploy:
+	ansible-playbook --limit=remote --user=cadizm plays/deploy.yml
+
+remote_migrate:
+	ansible-playbook --limit=remote --user=cadizm plays/migrate.yml
+
+remote_seed:
+	ansible-playbook --limit=remote --user=cadizm plays/seed.yml
 
 ## One-time targets that should only be used in production
 
 # note: requires python on remote host and will disable root login
-adduser_cadizm_remote:
-	ansible-playbook --user=root --limit=remote lib/ansible-provision/adduser-cadizm.yml
+remote_adduser_cadizm:
+	ansible-playbook --limit=remote --user=root lib/ansible-provision/adduser-cadizm.yml
 
-letsencrypt_remote:
-	ansible-playbook --user=cadizm --limit=remote plays/enable-ssl.yml
+remote_letsencrypt:
+	ansible-playbook --limit=remote --user=cadizm plays/enable-ssl.yml

@@ -5,10 +5,14 @@
   become: true
   tasks:
     - name: makemigrations
-      command:
+      command: /opt/virtualenvs/roysss/bin/python manage.py makemigrations
+      args:
+        chdir: /opt/roysss/roysss
 
     - name: migrate
-      command:
+      command: /opt/virtualenvs/roysss/bin/python manage.py migrate
+      args:
+        chdir: /opt/roysss/roysss
 
     - name: Reload roysss service
       command: systemctl daemon-reload
