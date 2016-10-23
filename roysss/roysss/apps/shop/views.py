@@ -21,8 +21,6 @@ class CheckoutView(GetMethodNotAllowedMixin, BaseView):
     def post(self, *args, **kwargs):
         try:
             # TODO: inventory check
-            # TODO: stripe email confirmation
-
             kwargs = {k: v for k,v in self.request.POST.items()}
             charge = stripe_checkout(self.request, **kwargs)
 
