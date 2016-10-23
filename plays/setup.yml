@@ -74,6 +74,12 @@
       command: /bin/true
       notify: Copy roysss secrets
 
+    - name: Set var ownership
+      file:
+        path: /opt/roysss/var
+        owner: www-data
+        recurse: yes
+
     - name: Restart roysss service
       service: name=roysss state=restarted
 
