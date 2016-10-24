@@ -2,7 +2,7 @@
 
 cd /opt/roysss/roysss
 
-if [[ ! -f secrets ]]; then
+if [[ ! -f secrets.yml ]]; then
     echo "[`date`] Secrets file missing, bailing" >> /opt/roysss/var/log/error.log
     exit 1
 fi

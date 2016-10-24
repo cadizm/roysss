@@ -14,10 +14,10 @@
         requirements: /opt/roysss/requirements.txt
         virtualenv: /opt/virtualenvs/roysss
 
-    - name: Copy roysss secrets
+    - name: Copy roysss secrets.yml
       copy:
-        src: "{{playbook_dir}}/../roysss/secrets"
-        dest: /opt/roysss/roysss/secrets
+        src: "{{playbook_dir}}/../roysss/secrets.yml"
+        dest: /opt/roysss/roysss/secrets.yml
 
     - name: Reload roysss service
       command: systemctl daemon-reload

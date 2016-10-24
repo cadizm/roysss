@@ -1,20 +1,12 @@
 
 import os
+import yaml
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOG_DIR = os.path.abspath(os.path.join(BASE_DIR, '..', '..', 'var', 'log'))
 
-secrets = {}
-for line in open(os.path.join(BASE_DIR, '..', 'secrets')):
-    if not line or line.startswith('#'):
-        continue
-    try:
-        key, value = [s.strip() for s in line.split('=')]
-        secrets[key] = value
-    except:
-        continue
-
+secrets = yaml.load(open(os.path.join(BASE_DIR, '..', 'secrets.yml')).read())
 
 SECRET_KEY = secrets['DJANGO_SECRET_KEY']
 

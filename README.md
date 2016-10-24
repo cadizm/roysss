@@ -14,7 +14,7 @@ Secrets
 =======
 
 Environment variables and other secrets need to be read manually as needed
-from `secrets` file in the project's root directory.
+from `secrets.yml` file in the project's root directory.
 
 
 Installing pip Packages

@@ -98,5 +98,5 @@
 
     - name: Copy roysss secrets
       copy:
-        src: "{{playbook_dir}}/../roysss/secrets"
-        dest: /opt/roysss/roysss/secrets
+        src: "{{playbook_dir}}/../roysss/secrets.yml"
+        dest: /opt/roysss/roysss/secrets.yml
