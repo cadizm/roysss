@@ -14,10 +14,14 @@ if 'vagrant' in socket.gethostname():
     STRIPE['SECRET_KEY'] = secrets['STRIPE_TEST_SECRET_KEY']
     STRIPE['PUBLISHABLE_KEY'] = secrets['STRIPE_TEST_PUBLISHABLE_KEY']
 
-# TODO: remove me
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'roysss',
+        'USER': 'roysss',
+        'PASSWORD': secrets['POSTGRES_PASSWORD'],
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }

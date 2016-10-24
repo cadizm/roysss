@@ -25,32 +25,24 @@
         - Enable roysss service
         - Reload roysss service
 
-    - name: Install redis server
-      apt:
-        name: redis-server
-        state: latest
-      notify:
-        - Start redis service
+    - name: Ensure apt cache is up to date
+      apt: update_cache=yes
 
-    - name: Install vim
-      apt:
-        name: vim
-        state: latest
-
-    - name: Install git
-      apt:
-        name: git
-        state: latest
+    - name: Install packages
+      apt: name={{item}} state=latest
+      with_items:
+        - postgresql
+        - libpq-dev
+        - python-psycopg2
+        - redis-server
+        - python-pip
+        - git
+        - vim
 
     - name: Pull git repo
       git:
         repo: https://github.com/cadizm/roysss.git
         dest: /opt/roysss
-
-    - name: Install pip
-      apt:
-        name: python-pip
-        state: latest
 
     - name: Install virtualenv
       pip:
@@ -83,12 +75,12 @@
     - name: Restart roysss service
       service: name=roysss state=restarted
 
+    - name: Start redis
+      service: name=redis-server state=started
+
   handlers:
     - name: Reload nginx
       service: name=nginx state=reloaded
-
-    - name: Start redis service
-      service: name=redis-server state=started
 
     - name: Enable roysss service
       service: name=roysss enabled=yes
@@ -100,3 +92,5 @@
       copy:
         src: "{{playbook_dir}}/../roysss/secrets.yml"
         dest: /opt/roysss/roysss/secrets.yml
+
+- include: db.yml
