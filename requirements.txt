@@ -2,6 +2,7 @@ Django==1.10.1
 Jinja2==2.8
 gunicorn==19.6.0
 redis==2.10.5
+psycopg2==2.6.2
 stripe==1.41.0
 Werkzeug==0.11.11
 pyaml==16.9.0
