@@ -43,6 +43,12 @@ class Handler400View(TemplateView):
     status_code = 400
     template_name = '400.html'
 
+    def dispatch(self, *args, **kwargs):
+        context = dict(
+            request_id=self.request.request_id,
+            )
+        return super(Handler400View, self).render_to_response(context, **kwargs)
+
 
 class Handler403View(TemplateView):
     """
@@ -72,3 +78,9 @@ class Handler500View(TemplateView):
     """
     status_code = 500
     template_name = '500.html'
+
+    def dispatch(self, *args, **kwargs):
+        context = dict(
+            request_id=self.request.request_id,
+            )
+        return super(Handler500View, self).render_to_response(context, **kwargs)
