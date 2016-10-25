@@ -5,4 +5,3 @@ django-extensions==1.7.4
 ipdb==0.8.1
 ipdbplugin==1.4.2
 ipython==4.0.0
-Werkzeug==0.11.11
