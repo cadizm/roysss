@@ -5,6 +5,7 @@ from django.conf.urls import (url, include, handler400, handler403,
 
 import roysss.apps.home.urls
 import roysss.apps.shop.urls
+import roysss.apps.error.urls
 
 from roysss.apps.common.views import (Handler400View, Handler403View,
     Handler404View, Handler500View,
@@ -14,6 +15,7 @@ from roysss.apps.common.views import (Handler400View, Handler403View,
 urlpatterns = [
     url(r'^', include(roysss.apps.home.urls)),
     url(r'^shop/', include(roysss.apps.shop.urls)),
+    url(r'^error/', include(roysss.apps.error.urls)),
 ]
 
 

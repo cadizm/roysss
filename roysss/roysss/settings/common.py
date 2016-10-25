@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # start local apps
     'roysss.apps.common',
+    'roysss.apps.error',
     'roysss.apps.home',
     'roysss.apps.shop',
 ]

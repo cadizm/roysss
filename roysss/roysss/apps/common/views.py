@@ -51,6 +51,12 @@ class Handler403View(TemplateView):
     status_code = 403
     template_name = '403.html'
 
+    def dispatch(self, *args, **kwargs):
+        context = dict(
+            request_id=self.request.request_id,
+            )
+        return super(Handler403View, self).render_to_response(context, **kwargs)
+
 
 class Handler404View(BaseTemplateView):
     """
