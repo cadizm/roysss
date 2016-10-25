@@ -6,8 +6,8 @@ The basic idea for testing local deployment is to create a new virtualbox
 instance that mimics the production vps host (e.g. digital ocean).
 
 ```
-$ vagrant up
-$ make deploy_local
+$ vagrant up && make local_setup
+$ make local_deploy && make local_migrate && make local_seed
 ```
 
 Secrets
