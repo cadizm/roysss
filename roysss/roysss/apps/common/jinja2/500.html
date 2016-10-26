@@ -1,6 +1,11 @@
 
 {% extends "base-error.html" %}
 
+{% block title %}
+<meta name="description" content="500 Internal Server Error">
+<title>500 Internal Server Error</title>
+{% endblock %}
+
 {% block content %}
   <h1><span class="glyphicon glyphicon-fire red"></span> 500 Internal Server Error</h1>
   <p class="lead">Oh noesss Internal Server Error</p>

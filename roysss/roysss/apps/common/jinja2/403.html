@@ -1,6 +1,11 @@
 
 {% extends "base-error.html" %}
 
+{% block title %}
+<meta name="description" content="403 Forbidden">
+<title>403 Forbidden</title>
+{% endblock %}
+
 {% block content %}
   <h1><i class="fa fa-ban red"></i> 403 Forbidden</h1>
   <p class="lead">Yowza you don't have permission to access this resource</p>
