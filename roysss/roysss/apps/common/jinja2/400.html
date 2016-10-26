@@ -1,2 +1,7 @@
-400 <br/>
-Request Id: {{ request_id }}
+
+{% extends "base-error.html" %}
+
+{% block content %}
+  <h1><i class="fa fa-ban red"></i> 400 Bad Request</h1>
+  <p class="lead">Oops we didn't understand your request</p>
+{% endblock %}

@@ -1,2 +1,7 @@
-404 <br/>
-Request Id: {{ request_id }}
+
+{% extends "base-error.html" %}
+
+{% block content %}
+  <h1><i class="fa fa-frown-o red"></i> 404 Not Found</h1>
+  <p class="lead">We couldn't find what you're looking for T_T</p>
+{% endblock %}

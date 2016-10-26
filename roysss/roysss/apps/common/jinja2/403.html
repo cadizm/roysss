@@ -1,2 +1,7 @@
-403 <br/>
-Request Id: {{ request_id }}
+
+{% extends "base-error.html" %}
+
+{% block content %}
+  <h1><i class="fa fa-ban red"></i> 403 Forbidden</h1>
+  <p class="lead">Yowza you don't have permission to access this resource</p>
+{% endblock %}

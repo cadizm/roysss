@@ -1,2 +1,7 @@
-500 <br/>
-Request Id: {{ request_id }}
+
+{% extends "base-error.html" %}
+
+{% block content %}
+  <h1><span class="glyphicon glyphicon-fire red"></span> 500 Internal Server Error</h1>
+  <p class="lead">Oh noesss Internal Server Error</p>
+{% endblock %}
