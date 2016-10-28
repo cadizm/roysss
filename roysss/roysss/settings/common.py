@@ -48,6 +48,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'environment': 'roysss.jinja2.environment.Jinja2Environment',
         },
     },
 ]

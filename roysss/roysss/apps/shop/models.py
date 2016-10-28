@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-from roysss.apps.common.utils import pp_cents_to_dollars, gen_order_number
+from roysss.apps.common.utils import currency, gen_order_number
 
 from roysss.apps.shop.exceptions import InsufficientInventoryError
 
@@ -22,7 +22,7 @@ class Item(models.Model):
     description = models.CharField(max_length=256)
 
     def __str__(self):
-        return "(%s) price: %s" % (self.style.style_id, pp_cents_to_dollars(self.amount))
+        return "(%s) price: %s" % (self.style.style_id, currency(self.amount))
 
 
 class Inventory(models.Model):

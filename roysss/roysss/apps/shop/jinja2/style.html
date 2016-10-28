@@ -28,8 +28,7 @@
         {# TODO: add link to other sizes #}
 
         <p class="description">{{ style.description }}</p>
-        {# TODO: add context_processor for cents to dollars #}
-        <p>{{ style.item.amount }}</p>
+        <p>{{ style.item.amount|currency }}</p>
 
         <p>
         {% if style.item.inventory > 0 %}

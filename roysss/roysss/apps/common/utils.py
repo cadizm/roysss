@@ -7,8 +7,11 @@ import random
 ORDER_NUMBER_CORPUS = string.uppercase + string.digits
 
 
-def pp_cents_to_dollars(amount):
-    return "$%d" % (amount / 100.0)
+def currency(amount, format='usd'):
+    if format != 'usd':
+        raise Exception('Unsupported currency format')
+
+    return "$%.2f" % (amount / 100.0)
 
 
 def gen_order_number(size=8, tries=0):
