@@ -7,4 +7,4 @@ from django.views.generic.base import TemplateView
 class HomeView(TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
-        return HttpResponseRedirect(reverse('shop'))
+        return HttpResponseRedirect(reverse('style', kwargs=dict(style_id='s001')))

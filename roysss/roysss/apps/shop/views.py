@@ -10,7 +10,7 @@ from roysss.apps.common.views import BaseView, BaseTemplateView, Handler400View
 
 from roysss.apps.shop.checkout import stripe_checkout
 from roysss.apps.shop.exceptions import InsufficientInventoryError
-from roysss.apps.shop.mixins import StripeMixin
+from roysss.apps.shop.mixins import StripeMixin, StyleMixin
 from roysss.apps.shop.models import Inventory
 
 import logging
@@ -29,6 +29,19 @@ class ShopView(StripeMixin, BaseTemplateView):
 
         context.update(
             inventory=inventory,
+            )
+
+        return context
+
+
+class ShopStyleView(StyleMixin, ShopView):
+    template_name = 'style.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ShopStyleView, self).get_context_data(*args, **kwargs)
+
+        context.update(
+            style=self.style,
             )
 
         return context
