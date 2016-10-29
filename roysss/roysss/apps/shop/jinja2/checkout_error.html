@@ -1,1 +1,12 @@
-checkout error
+
+{% extends "base-error.html" %}
+
+{% block title %}
+  <meta name="description" content="Checkout Error">
+  <title>Checkout Error</title>
+{% endblock %}
+
+{% block content %}
+  <h1><i class="fa fa-exclamation red"></i> Checkout Error</h1>
+  <p class="lead">A problem occurred during checkout. Your card has not been charged</p>
+{% endblock %}

@@ -1,68 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title></title>
+{% extends "base.html" %}
 
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/roysss.css" rel="stylesheet">
-  </head>
-  <body>
+{% block title%}{% endblock %}
 
-    <div class="container">
-      <div class="header clearfix">
-        <a href="/"><h2 class="text-muted">Roysss</h2></a>
-      </div>
+{% block item %}
+  <div class="item">
+    <h3>{{ style.item.description }}</h3>
 
-      <div class="item">
-        <h3>{{ style.item.description }}</h3>
+    {# TODO: make img srcset dynamic #}
+    <img src="/static/teee.jpg" sizes="70vw"
+         srcset="/static/teee320.jpg 320w, /static/teee360.jpg 360w, /static/teee412.jpg 412w, /static/teee768.jpg 768w"
+         alt="Roysss Teee">
 
-        {# TODO: make img srcset dynamic #}
-        <img src="/static/teee.jpg" sizes="70vw"
-             srcset="/static/teee320.jpg 320w, /static/teee360.jpg 360w, /static/teee412.jpg 412w, /static/teee768.jpg 768w"
-             alt="Roysss Teee">
+    {# TODO: add link to other sizes #}
 
-        {# TODO: add link to other sizes #}
+    <p class="description">{{ style.description }}</p>
+    <p>{{ style.item.amount|currency }}</p>
 
-        <p class="description">{{ style.description }}</p>
-        <p>{{ style.item.amount|currency }}</p>
-
-        <p>
-        {% if style.item.inventory > 0 %}
-          <form action="/shop/checkout/" method="POST">
-            <script
-              src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="{{ stripe.PUBLISHABLE_KEY }}"
-              data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-              data-description="{{ style.item.description }}"
-              data-amount="{{ style.item.amount }}"
-              data-locale="auto"
-              data-zip-code="true"
-              data-billing-address="true"
-              data-label="Purchase"
-              data-allow-remember-me="false">
-            </script>
-            <input type="hidden" name="style_id" value="{{ style.style_id }}">
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-          </form>
-        {% else %}
-          <strong>Sold Out</strong>
-        {% endif %}
-        </p>
-      </div>
-
-      <footer class="footer">
-        <p>&copy; {{ current_year }} Roysss, Inc.</p>
-      </footer>
-
-    </div>
-
-    <script src="/static/js/jquery-3.1.1.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/js.cookie-2.1.3.min.js"></script>
-    <script src="/static/js/roysss.js"></script>
-  </body>
-</html>
+    <p>
+    {% if style.item.inventory > 0 %}
+      <form action="/shop/checkout/" method="POST">
+        <script
+          src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="{{ stripe.PUBLISHABLE_KEY }}"
+          data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+          data-description="{{ style.item.description }}"
+          data-amount="{{ style.item.amount }}"
+          data-locale="auto"
+          data-zip-code="true"
+          data-billing-address="true"
+          data-label="Purchase"
+          data-allow-remember-me="false">
+        </script>
+        <input type="hidden" name="style_id" value="{{ style.style_id }}">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+      </form>
+    {% else %}
+      <strong>Sold Out</strong>
+    {% endif %}
+    </p>
+  </div>
+{% endblock %}
