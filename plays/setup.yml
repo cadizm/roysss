@@ -6,7 +6,7 @@
   tasks:
     - name: Install nginx
       apt:
-        name: nginx=1.10.0-0ubuntu0.16.04.2
+        name: nginx
         state: present
         update_cache: yes
 
