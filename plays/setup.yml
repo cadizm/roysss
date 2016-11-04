@@ -36,6 +36,7 @@
         - python-psycopg2
         - redis-server
         - python-pip
+        - logrotate
         - git
         - vim
 
@@ -65,6 +66,11 @@
     - name: Copy royss secrets (task)
       command: /bin/true
       notify: Copy roysss secrets
+
+    - name: Copy roysss logrotate
+      copy:
+        src: "{{playbook_dir}}/roysss-logrotate.conf"
+        dest: /etc/logrotate.d/roysssd
 
     - name: Set var ownership
       file:
