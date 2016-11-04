@@ -70,7 +70,7 @@
     - name: Copy roysss logrotate
       copy:
         src: "{{playbook_dir}}/roysss-logrotate.conf"
-        dest: /etc/logrotate.d/roysssd
+        dest: /etc/logrotate.d/roysss
 
     - name: Set var ownership
       file:
