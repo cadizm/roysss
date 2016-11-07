@@ -53,6 +53,8 @@ class CheckoutView(RedisMixin, GetMethodNotAllowedMixin, BaseView):
 
     def post(self, *args, **kwargs):
         try:
+            assert self.redis.ping()  # make sure redis is up
+
             kwargs = {k: v for k,v in self.request.POST.items()}
             charge = stripe_checkout(self.request, **kwargs)
 
