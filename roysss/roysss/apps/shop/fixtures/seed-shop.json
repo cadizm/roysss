@@ -3,14 +3,16 @@
     "model": "shop.style",
     "fields": {
         "style_id": "s001",
-        "description": "Roysss Teee | size medium"
+        "description": "Roysss Teee | Size Medium",
+        "size": "Medium"
     }
 },
 {
     "model": "shop.style",
     "fields": {
         "style_id": "s002",
-        "description": "Roysss Teee | size large"
+        "description": "Roysss Teee | Size Large",
+        "size": "Large"
     }
 },
 {

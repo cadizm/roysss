@@ -11,6 +11,7 @@ from roysss.apps.shop.exceptions import InsufficientInventoryError
 class Style(models.Model):
     style_id = models.CharField(max_length=32)
     description = models.CharField(max_length=256)
+    size = models.CharField(max_length=32)
 
     def __str__(self):
         return "(%s) %s" % (self.style_id, self.description)
