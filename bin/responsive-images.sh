@@ -13,7 +13,9 @@ if [[ -z ${INFILE:-""} ]]; then
     exit 1
 fi
 
-RESOLUTIONS="320x568 360x640 412x732 768x1024"
+# http://gs.statcounter.com/?PHPSESSID=5j5ugptrksqdb6pmquga0qspk7#resolution-ww-monthly-201507-201606
+# iPhone 5, iPhone 6, iPhone 6 Plus, iPad, "standard laptop", "higher end laptop"
+RESOLUTIONS="320x568 375x667 414x736 768x1024 1366x768 1920x1080"
 
 for RES in $(echo ${RESOLUTIONS}); do
     WIDTH=$(echo ${RES} | awk -F 'x' '{print $1}')
